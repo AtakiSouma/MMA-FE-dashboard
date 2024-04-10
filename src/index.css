@@ -15,3 +15,22 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; */
 }
+:where(.css-dev-only-do-not-override-1kuana8).ant-image {
+  display: block;
+}
+.parent-class .ant-image {
+  display: block;
+}
+.ant-image {
+  display: block;
+}
+.ant-layout-sider-light {
+  background: "#135D66";
+}
+.ant-layout-sider-children{
+  background-color: "#135D66";
+}
+.ant-menu-item{
+  background-color: "#135D66";
+
+}

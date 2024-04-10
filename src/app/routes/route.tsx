@@ -5,6 +5,7 @@ import MainLayout from "../layout/MainLayout";
 // import Page from index.ts
 const DashBoard = lazy(() => import("../pages/DashBoard"));
 const LoginPage = lazy(() => import("../pages/auth/LoginPage"));
+const SignUpPage = lazy(() => import("../pages/auth/SingUpPage"));
 // end import pages
 // ********************************
 
@@ -15,9 +16,16 @@ export const router = createBrowserRouter([
       <MainLayout>
         <Routes>
           <Route path="dashboard" element={<DashBoard />} />
-          <Route path="login" element={<LoginPage />} />
         </Routes>
       </MainLayout>
     ),
+  },
+  {
+    path: "login",
+    element: <LoginPage />,
+  },
+  {
+    path: "register",
+    element: <SignUpPage />,
   },
 ]);
