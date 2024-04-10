@@ -19,3 +19,25 @@ export interface userLoginParams {
   email: string;
   password: string;
 }
+export interface LoginWithGoogleParams {
+  name: string;
+  email: string;
+  photo: string;
+}
+
+export interface UserData {
+  data: {
+    access_token: string;
+    link: string;
+    user: {
+      avatar: string;
+      email: string;
+      id: string;
+      name: string;
+      photoUrl: string;
+      role: string;
+    };
+    status: number;
+    success: boolean;
+  };
+}
