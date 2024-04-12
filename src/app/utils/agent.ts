@@ -34,7 +34,11 @@ const User = {
       confirmPassword: input.confirmPassword,
     }),
 };
+const Role = {
+  checkRole: () => requests.get("role/get-role"),
+};
 const agent = {
   User,
+  Role,
 };
 export default agent;

@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { Suspense, lazy } from "react";
 import { Route, Routes, createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layout/MainLayout";
 // ********************************
@@ -15,7 +15,9 @@ export const router = createBrowserRouter([
     element: (
       <MainLayout>
         <Routes>
-          <Route path="dashboard" element={<DashBoard />} />
+          <Suspense fallback={<></>}>
+            <Route path="dashboard" element={<DashBoard />} />
+          </Suspense>
         </Routes>
       </MainLayout>
     ),
