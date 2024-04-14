@@ -10,7 +10,6 @@ const Navbar = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { state } = useAuth();
-  console.log("user", state.googleUser);
   const logOut = async () => {
     setLoading(true);
     try {
@@ -54,7 +53,7 @@ const Navbar = () => {
             size={40}
             icon={<UserOutlined />}
             src={
-              state.googleUser.data.user.photoUrl ||
+              // state.googleUser.data.user.photoUrl ||
               "https://upload-os-bbs.hoyolab.com/upload/2024/02/12/349567740/abbb8591430236b218af498cb4bdcef7_5647250500608824280.jpg?x-oss-process=image%2Fresize%2Cs_1000%2Fauto-orient%2C0%2Finterlace%2C1%2Fformat%2Cwebp%2Fquality%2Cq_80"
             }
           />
