@@ -1,10 +1,21 @@
-import { RouterProvider } from 'react-router-dom';
-import { router } from './app/routes/route';
+import { RouterProvider } from "react-router-dom";
+import { router } from "./app/routes/route";
+import {App, ConfigProvider } from "antd";
 
-export default function App() {
+export default function AppWrapper() {
   return (
     <>
-      <RouterProvider router={router} />
+      <ConfigProvider
+        theme={{
+          token: {
+            colorPrimary: "#135D66",
+          },
+        }}
+      >
+        <App>
+        <RouterProvider router={router} />
+        </App>
+      </ConfigProvider>
     </>
   );
 }
