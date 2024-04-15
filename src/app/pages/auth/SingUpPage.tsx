@@ -2,13 +2,10 @@ import { Button, Divider, Typography } from "antd";
 import React from "react";
 import { ImagesComponents } from "../../components";
 import { MdEmail } from "react-icons/md";
-import { RiLockPasswordFill, RiLockPasswordLine } from "react-icons/ri";
-import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import { RiLockPasswordLine } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 import { Field, Form, Formik } from "formik";
 import { MyInputComponents } from "../../components/inputs/InputComponents";
-import { PiPasswordBold } from "react-icons/pi";
-import { FcGoogle } from "react-icons/fc";
 import { GoogleLoginButton } from "../../components/buttons/GoogleButton";
 import { FaUserEdit } from "react-icons/fa";
 import * as Yup from "yup";
@@ -25,7 +22,7 @@ const SignUpPage = () => {
     email: "",
     password: "",
     name: "",
-    confirmPassword:"",
+    confirmPassword: "",
   };
   const validate = ErrorMessageRegister;
   const navigate = useNavigate();

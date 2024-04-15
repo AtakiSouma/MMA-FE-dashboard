@@ -2,6 +2,7 @@ import { AxiosResponse } from "axios";
 import apiJWT from "./apiJwt";
 import baseApi from "./BaseApi";
 import { UserRegisterParams } from "../models/auth.models";
+import { PaginationParams } from "../models/global.models";
 
 const responseBody = (response: AxiosResponse) => response.data;
 
@@ -33,9 +34,15 @@ const User = {
       password: input.password,
       confirmPassword: input.confirmPassword,
     }),
+  getAllUsers: (input: PaginationParams) =>
+    requests.post("/api/v1/user/get-all", {
+      page: input.page,
+      limit: input.limit,
+      search: input.search,
+    }),
 };
 const Role = {
-  checkRole: () => requests.get("role/get-role"),
+  checkRole: () => requests.get("/api/v1/role/get-role"),
 };
 const agent = {
   User,

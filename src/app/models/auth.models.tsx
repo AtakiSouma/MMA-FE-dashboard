@@ -41,3 +41,15 @@ export interface UserData {
     success: boolean;
   };
 }
+export interface UserData {
+  access_token: string;
+  link: string;
+  user: {
+    avatar: string;
+    email: string;
+    id: string;
+    name: string;
+    photoUrl: string;
+    role: string;
+  };
+}
