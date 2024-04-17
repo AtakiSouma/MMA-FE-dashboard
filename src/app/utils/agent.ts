@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AxiosResponse } from "axios";
 import apiJWT from "./apiJwt";
 import baseApi from "./BaseApi";
@@ -41,11 +42,25 @@ const User = {
       search: input.search,
     }),
 };
+const Categories = {
+  getAllCategories: () => requests.get("/api/v1/category/"),
+};
 const Role = {
   checkRole: () => requests.get("/api/v1/role/get-role"),
+};
+const Course = {
+  createCourse: (data: any) => requests.post("/api/v1/course", { data }),
+  getAllCourse: (input: PaginationParams) =>
+    requests.post("/api/v1/course/get-all", {
+      page: input.page,
+      limit: input.limit,
+      search: input.search,
+    }),
 };
 const agent = {
   User,
   Role,
+  Categories,
+  Course,
 };
 export default agent;

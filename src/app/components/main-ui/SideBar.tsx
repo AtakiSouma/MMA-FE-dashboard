@@ -6,7 +6,9 @@ import { LuUsers2 } from "react-icons/lu";
 import Sider from "antd/es/layout/Sider";
 import { cn } from "../../utils/cn";
 import { GiBookCover } from "react-icons/gi";
+import { IoMdCreate } from "react-icons/io";
 
+import { CiBoxList } from "react-icons/ci";
 import logo from "../../../assets/logoipsum-254.svg";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 type MenuItem = Required<MenuProps>["items"][number];
@@ -45,7 +47,10 @@ const SideBar = () => {
     return [
       getItem("Dashboard", "dashboard", <LuLayoutDashboard />),
       getItem("User", "user", <LuUsers2 />),
-      getItem("Course" ,"course" , <GiBookCover/> )
+      getItem("Course", "", <GiBookCover />, [
+        getItem("List", "course", <CiBoxList />),
+        getItem("Create", "create-course",<IoMdCreate/>),
+      ]),
     ];
   };
   return (
@@ -83,7 +88,7 @@ const SideBar = () => {
               )}
             >
               {" "}
-              <Image src={logo} alt="logo" width={140} height={50}/>
+              <Image src={logo} alt="logo" width={140} height={50} />
             </div>
             <img
               src="https://res.cloudinary.com/didw3mt8i/image/upload/v1712734819/38221_jvfmez.jpg"

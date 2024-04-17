@@ -12,6 +12,10 @@ const SignUpPage = lazy(() => import("../pages/auth/SingUpPage"));
 const UserManagementPage = lazy(
   () => import("../pages/user/UserManagementPage")
 );
+const ListCoursePage = lazy(() => import("../pages/courses/ListCoursePage"));
+const CreateCoursePage = lazy(
+  () => import("../pages/courses/CreateCoursePage")
+);
 // end import pages
 // ********************************
 
@@ -37,6 +41,26 @@ export const router = createBrowserRouter([
               <Suspense fallback={<></>}>
                 <PrivateRoute inverted={false} requiredRoles={[ROLE.ADMIN]}>
                   <UserManagementPage />
+                </PrivateRoute>
+              </Suspense>
+            }
+          />
+          <Route
+            path="create-course"
+            element={
+              <Suspense fallback={<></>}>
+                <PrivateRoute inverted={false} requiredRoles={[ROLE.ADMIN]}>
+                  <CreateCoursePage />
+                </PrivateRoute>
+              </Suspense>
+            }
+          />
+          <Route
+            path="course"
+            element={
+              <Suspense fallback={<></>}>
+                <PrivateRoute inverted={false} requiredRoles={[ROLE.ADMIN]}>
+                  <ListCoursePage />
                 </PrivateRoute>
               </Suspense>
             }
