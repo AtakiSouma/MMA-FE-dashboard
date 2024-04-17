@@ -5,6 +5,8 @@ import { LuLayoutDashboard } from "react-icons/lu";
 import { LuUsers2 } from "react-icons/lu";
 import Sider from "antd/es/layout/Sider";
 import { cn } from "../../utils/cn";
+import { GiBookCover } from "react-icons/gi";
+
 import logo from "../../../assets/logoipsum-254.svg";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 type MenuItem = Required<MenuProps>["items"][number];
@@ -35,7 +37,6 @@ const SideBar = () => {
     };
 
     window.addEventListener("resize", handleResize);
-
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -44,6 +45,7 @@ const SideBar = () => {
     return [
       getItem("Dashboard", "dashboard", <LuLayoutDashboard />),
       getItem("User", "user", <LuUsers2 />),
+      getItem("Course" ,"course" , <GiBookCover/> )
     ];
   };
   return (

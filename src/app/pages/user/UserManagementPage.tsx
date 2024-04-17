@@ -70,7 +70,7 @@ const UserManagementPage = () => {
   const { Search } = Input;
   const { currentPage, pageCount, userAdaptersByPage, userLoading } = useUser();
   const tableColumns = columns({ currentPage, displayData: 8 });
-
+ console.log("user ",userAdaptersByPage[currentPage])
   const handlePageChange = (page: number) => {
     dispatch(setCurrentPage(page));
     if (!userAdaptersByPage[page]) {
