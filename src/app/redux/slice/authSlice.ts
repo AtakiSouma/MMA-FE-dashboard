@@ -71,7 +71,7 @@ const authSlice = createSlice({
       state.isFetching = false;
       state.status = " create successfully";
     });
-    builder.addCase(createAccounts.rejected, (state, action) => {
+    builder.addCase(createAccounts.rejected, (state) => {
       state.isFetching = false;
       state.status = "rejected create";
       // state.displayError = action.payload;
