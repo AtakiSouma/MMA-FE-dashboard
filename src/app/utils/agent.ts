@@ -46,7 +46,7 @@ const Categories = {
   getAllCategories: () => requests.get("/api/v1/category/"),
 };
 const Role = {
-  checkRole: () => requests.get("/api/v1/role/get-role"),
+  checkRole: (id: string) => requests.get(`api/v1/role/get-role/${id}`),
 };
 const Course = {
   createCourse: (data: any) => requests.post("/api/v1/course", { data }),
@@ -57,10 +57,19 @@ const Course = {
       search: input.search,
     }),
 };
+const Order = {
+  getAllOrder: (input: PaginationParams) =>
+    requests.post("/api/v1/order/get-all", {
+      page: input.page,
+      limit: input.limit,
+      search: input.search,
+    }),
+};
 const agent = {
   User,
   Role,
   Categories,
   Course,
+  Order,
 };
 export default agent;
