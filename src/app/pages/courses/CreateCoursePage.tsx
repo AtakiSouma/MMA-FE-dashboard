@@ -4,19 +4,20 @@ import CoursePreview from "./components/CoursePreview";
 import CourseOptions from "./components/CourseOption";
 import CourseInformation from "./components/CourseInformation";
 import CourseData from "./components/CourseData";
-import { Flex, Spin, message } from "antd";
+import { Spin, message } from "antd";
 
 import CourseContent from "./components/CourseContent";
-import { useAppDispatch, useAppSelector } from "../../redux/hook";
-import { createCourseAsync } from "../../redux/slice/courseSlice";
-import { Router, useNavigate } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
 import apiJWT from "../../utils/apiJwt";
-import { useCreateCourse } from "../../hooks/useCreate";
+import { UserData } from "../../models/auth.models";
 const CreateCoursePage = () => {
-  const dispatch = useAppDispatch();
+  const userDataObject: UserData = JSON.parse(localStorage.getItem("user")!);
+
+  console.log("user", userDataObject);
   const [active, setActive] = useState(0);
   const [courseInfo, setCourseInfo] = useState({
-    instructor: "",
+    instructor: userDataObject.user.id,
     name: "",
     description: "",
     price: 0,
@@ -27,6 +28,7 @@ const CreateCoursePage = () => {
 
     demoUrl: "",
   });
+
   const navigate = useNavigate();
   const [benefits, setBenefits] = useState([{ title: "" }]);
   const [prerequisites, setPrerequisites] = useState([{ title: "" }]);
@@ -71,6 +73,7 @@ const CreateCoursePage = () => {
 
     // prepare for data object
     const data = {
+      instructor: courseInfo.instructor,
       name: courseInfo.name,
       description: courseInfo.description,
       price: courseInfo.price,
@@ -120,9 +123,9 @@ const CreateCoursePage = () => {
     <>
       {loading ? (
         <div className="flex items-center flex-col justify-center mt-64">
-         <Spin tip="Create a course will take a few second....." size="large">
-        <div className="content w-[500px]" />
-      </Spin>
+          <Spin tip="Create a course will take a few second....." size="large">
+            <div className="content w-[500px]" />
+          </Spin>
         </div>
       ) : (
         <div className="w-full flex min-h-screen">
