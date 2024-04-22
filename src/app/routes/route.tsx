@@ -12,6 +12,7 @@ const SignUpPage = lazy(() => import("../pages/auth/SingUpPage"));
 const UserManagementPage = lazy(
   () => import("../pages/user/UserManagementPage")
 );
+const ResultListPage = lazy(() => import("../pages/instuctor/ResultList"));
 const ListCoursePage = lazy(() => import("../pages/courses/ListCoursePage"));
 const CreateCoursePage = lazy(
   () => import("../pages/courses/CreateCoursePage")
@@ -66,12 +67,22 @@ export const router = createBrowserRouter([
               </Suspense>
             }
           />
-           <Route
+          <Route
             path="order-list"
             element={
               <Suspense fallback={<></>}>
                 <PrivateRoute inverted={false} requiredRoles={[ROLE.ADMIN]}>
                   <OrderListPage />
+                </PrivateRoute>
+              </Suspense>
+            }
+          />
+          <Route
+            path="result-list"
+            element={
+              <Suspense fallback={<></>}>
+                <PrivateRoute inverted={false} requiredRoles={[ROLE.INSTRUCTOR]}>
+                  <ResultListPage />
                 </PrivateRoute>
               </Suspense>
             }

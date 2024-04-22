@@ -3,14 +3,16 @@ import authSlice from "./slice/authSlice";
 import roleSlice from "./slice/roleSlice";
 import userSlice from "./slice/userSlice";
 import courseSlice from "./slice/courseSlice";
-import orderSlice from "./slice/orderSlice"
+import orderSlice from "./slice/orderSlice";
+import resultSlice from "./slice/resultSlice";
 export const store = configureStore({
   reducer: {
     auth: authSlice,
     role: roleSlice,
     user: userSlice,
     course: courseSlice,
-    order: orderSlice
+    order: orderSlice,
+    result: resultSlice,
   },
 });
 

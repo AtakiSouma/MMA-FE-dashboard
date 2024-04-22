@@ -8,6 +8,9 @@ import { cn } from "../../utils/cn";
 import { GiBookCover } from "react-icons/gi";
 import { IoMdCreate } from "react-icons/io";
 import { GoChecklist } from "react-icons/go";
+import { MdQuickreply } from "react-icons/md";
+import { MdCreditScore } from "react-icons/md";
+import { RiShoppingCart2Fill } from "react-icons/ri";
 
 import { CiBoxList } from "react-icons/ci";
 import logo from "../../../assets/logoipsum-254.svg";
@@ -67,7 +70,12 @@ const SideBar = () => {
           getItem("Course", "", <GiBookCover />, [
             getItem("List", "course", <CiBoxList />),
             getItem("Create", "create-course", <IoMdCreate />),
+
           ]),
+          getItem("Order" , "order-list" ,<RiShoppingCart2Fill/>),
+          getItem("Comment", "comment-list" ,<MdQuickreply/> ),
+          getItem("Response", "result-list" ,<MdCreditScore/> ),
+
         ];
       default:
         return [];
