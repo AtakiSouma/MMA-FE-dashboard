@@ -33,16 +33,16 @@ export function useAuth() {
           user.role === "6615424b73f8eddb58cfe6ac") ||
         user.role === "66153c6d09d7c5006797e0a3"
       ) {
-        console.log("Here")
+        console.log("Here");
         navigate(link);
       } else if (
         user.isCertified === "Proccessing" &&
         user.isVerified === false &&
         user.role === "6615424b73f8eddb58cfe6ac"
       ) {
-        navigate("/wait");
+        navigate("/instructor/wait");
       } else {
-        navigate("/start");
+        navigate("/instructor/start");
       }
     } catch (error) {
       if (error) {
