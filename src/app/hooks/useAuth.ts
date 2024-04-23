@@ -28,12 +28,12 @@ export function useAuth() {
       localStorage.setItem("user", JSON.stringify(user));
       localStorage.setItem("link", JSON.stringify(link));
       if (
-        (user.isCertified === "Yes" &&
-          user.isVerified === true &&
-          user.role === "6615424b73f8eddb58cfe6ac") ||
-        user.role === "66153c6d09d7c5006797e0a3"
+        user.isCertified === "Yes" &&
+        user.isVerified === true &&
+        user.role === "6615424b73f8eddb58cfe6ac"
       ) {
-        console.log("Here");
+        navigate("/course");
+      } else if (user.role === "66153c6d09d7c5006797e0a3") {
         navigate(link);
       } else if (
         user.isCertified === "Proccessing" &&

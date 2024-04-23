@@ -53,12 +53,13 @@ export function GoogleLoginButton() {
       dispatch(loginSuccessWithGoogle(data));
       console.log(data.data.link);
       if (
-        (user.user.isCertified === "Yes" &&
-          user.user.isVerified === true &&
-          user.user.role === "6615424b73f8eddb58cfe6ac") ||
-        user.user.role === "66153c6d09d7c5006797e0a3"
+        user.user.isCertified === "Yes" &&
+        user.user.isVerified === true &&
+        user.user.role === "6615424b73f8eddb58cfe6ac"
       ) {
-        navigate(data.data.link);
+        navigate("/course");
+      } else if (user.user.role === "66153c6d09d7c5006797e0a3") {
+        navigate(link);
       } else if (
         user.user.isCertified === "Proccessing" &&
         user.user.isVerified === false &&

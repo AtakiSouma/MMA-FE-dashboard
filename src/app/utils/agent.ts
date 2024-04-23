@@ -108,6 +108,14 @@ const Result = {
       replyMessage: input.replyMessage,
     }),
 };
+const Payment = {
+  createCoursePaymentUrl: (id: string) =>
+    requests.get(`/api/v1/payment/getPaymentUrl/${id}`),
+  getReturnPaymentUrl: (id: string, queryString: string) =>
+    requests.post(`/api/v1/payment/returnUrl/${id}`, {
+      vnp_Params: queryString,
+    }),
+};
 const agent = {
   User,
   Role,
@@ -115,5 +123,6 @@ const agent = {
   Course,
   Order,
   Result,
+  Payment,
 };
 export default agent;
