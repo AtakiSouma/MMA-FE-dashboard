@@ -46,6 +46,19 @@ export const fetchAllTeacherAsync = createAsyncThunk<
   }
 });
 
+export const getInstructorDetailAsync = createAsyncThunk<
+  TeachersData,
+  string,
+  { state: RootState }
+>("user/getUserDetailAsync", async (input, thunkAPI) => {
+  try {
+    const response = await agent.User.getInstructorDetail(input);
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue({ error });
+  }
+});
+
 const teacherSlice = createSlice({
   name: "teacher",
   initialState,

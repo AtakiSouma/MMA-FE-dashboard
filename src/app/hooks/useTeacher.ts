@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { PaginationParams } from "../models/global.models";
 import { useAppDispatch, useAppSelector } from "../redux/hook";
-import { fetchAllTeacherAsync } from "../redux/slice/teacherSlice";
+import { fetchAllTeacherAsync, getInstructorDetailAsync } from "../redux/slice/teacherSlice";
 
 export default function useTeacher() {
   const {
@@ -18,6 +18,14 @@ export default function useTeacher() {
     limit: 6,
     page: currentPage,
     search: searchValue,
+  };
+
+  const getInstructorDetail = async (id: string) => {
+    const data = await dispatch(getInstructorDetailAsync(id))
+    console.log(data)
+    if (data) {
+      return data
+    }
   };
 
   useEffect(() => {

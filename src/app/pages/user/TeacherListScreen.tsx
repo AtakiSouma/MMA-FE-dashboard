@@ -19,6 +19,7 @@ import { GoEye } from "react-icons/go";
 import {
   CheckCircleOutlined,
   CloseCircleOutlined,
+  CrownOutlined,
   SyncOutlined,
 } from "@ant-design/icons";
 import ModalComponentInTeacher from "../../components/ModalCompoenetInTeacher";
@@ -37,40 +38,51 @@ const TeacherListScreen = () => {
           onClick={() => showModal(record)}
         >
           <GoEye />
-          <p>View</p>
+          <p>Detail</p>
         </div>
       ),
       key: "0",
     },
-    {
-      label: (
-        <div
-          className="flex flex-row items-center gap-2  hover:text-green-400"
-          onClick={() => alert("Hello Approve")}
-        >
-          <GoShieldCheck />
-          <p>Approve</p>
-        </div>
-      ),
-      key: "1",
-    },
-    {
-      label: (
-        <div
-          className="flex flex-row items-center gap-2 hover:text-red-400"
-          onClick={() => alert("Hello Reject")}
-        >
-          <AiOutlineDelete />
-          <p>Reject</p>
-        </div>
-      ),
-      key: "2",
-    },
+    // {
+    //   label: (
+    //     <div
+    //       className="flex flex-row items-center gap-2  hover:text-yellow-500"
+    //       onClick={() => alert("Hello Approve")}
+    //     >
+    //       <CrownOutlined />
+    //       <p>Certificates</p>
+    //     </div>
+    //   ),
+    // },
+    // {
+    //   label: (
+    //     <div
+    //       className="flex flex-row items-center gap-2  hover:text-green-400"
+    //       onClick={() => alert("Hello Approve")}
+    //     >
+    //       <GoShieldCheck />
+    //       <p>Approve</p>
+    //     </div>
+    //   ),
+    //   key: "1",
+    // },
+    // {
+    //   label: (
+    //     <div
+    //       className="flex flex-row items-center gap-2 hover:text-red-400"
+    //       onClick={() => alert("Hello Reject")}
+    //     >
+    //       <AiOutlineDelete />
+    //       <p>Reject</p>
+    //     </div>
+    //   ),
+    //   key: "2",
+    // },
   ];
   // handle modal
   const [modalRecord, setModalRecord] = useState<TeachersData | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const showModal = (record:TeachersData) => {
+  const showModal = (record: TeachersData) => {
     setModalRecord(record);
 
     setIsModalOpen(true);
@@ -85,7 +97,7 @@ const TeacherListScreen = () => {
   };
   const getMenu = (record: TeachersData) => (
     <Menu>
-      {items(record).map(item => (
+      {items(record).map((item) => (
         <Menu.Item key={item.key}>{item.label}</Menu.Item>
       ))}
     </Menu>
@@ -203,9 +215,9 @@ const TeacherListScreen = () => {
       title: "Action",
       dataIndex: "id",
       width: "5%",
-      render: (id,record) => (
+      render: (id, record) => (
         <>
-          <Dropdown overlay={() => getMenu(record)} trigger={['click']}>
+          <Dropdown overlay={() => getMenu(record)} trigger={["click"]}>
             <div className="flex flex-col items-center">
               <BsThreeDots
                 className="hover:cursor-pointer"

@@ -61,6 +61,7 @@ const User = {
       limit: input.limit,
       search: input.search,
     }),
+  getInstructorDetail: (id: string) => requests.get(`/api/v1/user/${id}`)
 };
 const Categories = {
   getAllCategories: () => requests.get("/api/v1/category/"),

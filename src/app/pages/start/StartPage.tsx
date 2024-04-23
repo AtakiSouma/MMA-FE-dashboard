@@ -1,12 +1,22 @@
 import React, { useState } from "react";
 import { ImagesComponents } from "../../components";
-import { Button, Divider, Image, Typography, UploadProps, message } from "antd";
+import {
+  Button,
+  Divider,
+  Image,
+  Modal,
+  Spin,
+  Typography,
+  UploadProps,
+  message,
+} from "antd";
 import { useNavigate } from "react-router-dom";
 import useUser from "../../hooks/useUser.hooks";
 
 const StartPage = () => {
   const [isNext, setIsNext] = useState(false);
   const [dragging, setDragging] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { handleSubmitCerts } = useUser();
   const [list, setList] = useState({
@@ -54,8 +64,16 @@ const StartPage = () => {
     }
   };
   const handleSubmit = async () => {
-    console.log(list);
-    handleSubmitCerts(list, navigate);
+    setLoading(true);
+    try {
+      console.log(list);
+      const status = await handleSubmitCerts(list, navigate);
+      if (status) {
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -152,6 +170,12 @@ const StartPage = () => {
           >
             Next
           </Button>
+          <Modal footer={null} closable={false} open={loading}>
+            <div className="flex flex-col items-center justify-center">
+              <Spin size="large"></Spin>
+              <span>Moving</span>
+            </div>
+          </Modal>
         </div>
       )}
     </div>

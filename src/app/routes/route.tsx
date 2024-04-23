@@ -8,7 +8,7 @@ import StartPage from "../pages/start/StartPage";
 import WaitPage from "../pages/wait/WaitPage";
 // ********************************
 // import Page from index.ts
-const DashBoard = lazy(() => import("../pages/dashboard/components/DashBoard"));
+const DashBoard = lazy(() => import("../pages/dashboard/DashBoard"));
 const LoginPage = lazy(() => import("../pages/auth/LoginPage"));
 const SignUpPage = lazy(() => import("../pages/auth/SingUpPage"));
 const UserManagementPage = lazy(
@@ -115,31 +115,44 @@ export const router = createBrowserRouter([
     path: "register",
     element: <SignUpPage />,
   },
+  // {
+  //   path: "instructor",
+  //   element: (
+  //     <Routes>
+  //       <Route
+  //         path="start"
+  //         element={
+  //           <Suspense fallback={<></>}>
+  //             {/* <PrivateRoute inverted={false} requiredRoles={[ROLE.INSTRUCTOR]}> */}
+  //             <StartPage />
+  //             {/* </PrivateRoute> */}
+  //           </Suspense>
+  //         }
+  //       />
+  //       <Route
+  //         path="wait"
+  //         element={
+  //           <Suspense fallback={<></>}>
+  //             {/* <PrivateRoute inverted={false} requiredRoles={[ROLE.INSTRUCTOR]}> */}
+  //             <WaitPage />
+  //             {/* </PrivateRoute> */}
+  //           </Suspense>
+  //         }
+  //       />
+  //     </Routes>
+  //   ),
+  // },
   {
     path: "instructor",
-    element: (
-      <Routes>
-        <Route
-          path="start"
-          element={
-            <Suspense fallback={<></>}>
-              {/* <PrivateRoute inverted={false} requiredRoles={[ROLE.INSTRUCTOR]}> */}
-              <StartPage />
-              {/* </PrivateRoute> */}
-            </Suspense>
-          }
-        />
-        <Route
-          path="wait"
-          element={
-            <Suspense fallback={<></>}>
-              {/* <PrivateRoute inverted={false} requiredRoles={[ROLE.INSTRUCTOR]}> */}
-              <WaitPage />
-              {/* </PrivateRoute> */}
-            </Suspense>
-          }
-        />
-      </Routes>
-    ),
+    children: [
+      {
+        path: "start",
+        element: <StartPage />,
+      },
+      {
+        path: "wait",
+        element: <WaitPage />,
+      },
+    ],
   },
 ]);
