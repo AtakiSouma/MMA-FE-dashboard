@@ -45,14 +45,18 @@ const StartPage = () => {
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = () => {
+      reader.onload = (_e: any) => {
         const newList = [...list.listCerts];
-        newList[index].url = reader.result as string;
+        newList[index].url = reader.result as string; 
         setList({ listCerts: newList });
       };
       reader.readAsDataURL(file);
+      // const imageUrl = URL.createObjectURL(file);
+      // const newList = [...list.listCerts];
+      // newList[index].url = imageUrl;
     }
   };
+
   const handleSubmit = async () => {
     console.log(list);
     handleSubmitCerts(list, navigate);

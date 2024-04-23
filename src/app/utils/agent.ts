@@ -61,6 +61,13 @@ const User = {
       limit: input.limit,
       search: input.search,
     }),
+  getInstructorDetail: (id: string) => requests.get(`/api/v1/user/${id}`),
+  acceptInstructor: (id: string) =>
+    requests.put(`/api/v1/user/instructor/accept/${id}`, {}),
+  rejectInstructor: (id: string, reasons: string) =>
+    requests.put(`/api/v1/user/instructor/reject/${id}`, {
+      reasons: reasons,
+    }),
 };
 const Categories = {
   getAllCategories: () => requests.get("/api/v1/category/"),
@@ -101,6 +108,14 @@ const Result = {
       replyMessage: input.replyMessage,
     }),
 };
+const Payment = {
+  createCoursePaymentUrl: (id: string) =>
+    requests.get(`/api/v1/payment/getPaymentUrl/${id}`),
+  getReturnPaymentUrl: (id: string, queryString: string) =>
+    requests.post(`/api/v1/payment/returnUrl/${id}`, {
+      vnp_Params: queryString,
+    }),
+};
 const agent = {
   User,
   Role,
@@ -108,5 +123,6 @@ const agent = {
   Course,
   Order,
   Result,
+  Payment,
 };
 export default agent;

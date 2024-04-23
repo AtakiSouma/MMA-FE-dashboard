@@ -1,13 +1,13 @@
 import { Line } from "@ant-design/plots";
-import { useAppDispatch } from "../../../redux/hook";
+import { useAppDispatch } from "../../redux/hook";
 import { useDispatch } from "react-redux";
-import useDashboard from "../../../hooks/useDashboard";
+import useDashboard from "../../hooks/useDashboard";
 import { useState } from "react";
 import { Spin } from "antd";
-import Card from "./Card";
-import useCourse from "../../../hooks/useCreate";
+import Card from "./components/Card";
+import useCourse from "../../hooks/useCreate";
 import Table, { ColumnType, ColumnsType } from "antd/es/table";
-import { CourseData } from "../../../models/course.model";
+import { CourseData } from "../../models/course.model";
 
 type columnProps = {
   currentPage: number;

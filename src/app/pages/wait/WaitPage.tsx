@@ -1,11 +1,30 @@
 import { CheckCircleOutlined } from "@ant-design/icons";
-import React from "react";
-import { Link } from "react-router-dom";
+import { Button, notification } from "antd";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import apiJWT from "../../utils/apiJwt";
 
 const WaitPage = () => {
-  // https://i.etsystatic.com/40957748/r/il/e4efaa/4810125152/il_fullxfull.4810125152_23ir.jpg
+  
   const backgroundImageUrl =
     "https://i0.wp.com/halcyonrealms.com/blogpics/japgifB.gif?resize=500%2C291&ssl=1";
+  const navigate = useNavigate();
+  const handleGoBack = async () => {
+    try {
+      // const response = await apiJWT.post(`/api/v1/auth/logout`);
+      // if (response) {
+      //   localStorage.clear();
+        
+        navigate("/login");
+      // }
+    } catch (error) {
+      notification.error({
+        message: "Lỗi",
+        description: "Có lỗi xảy ra",
+        placement: "bottomLeft",
+      });
+    }
+  };
   return (
     <div
       className="flex items-center justify-center min-h-screen w-full"
@@ -25,7 +44,16 @@ const WaitPage = () => {
           It will take some time for us to review your application, please wait
           for our response via email
         </div>
-        <Link to={`/login`}>Go Back</Link>
+        {/* <Link to={`/login`}>Go Back</Link> */}
+        <Button
+          className="bg-purple border-none hover:text-pretty "
+          htmlType="submit"
+          size="large"
+          type="primary"
+          onClick={() => handleGoBack()}
+        >
+          Go Back
+        </Button>
       </div>
     </div>
   );

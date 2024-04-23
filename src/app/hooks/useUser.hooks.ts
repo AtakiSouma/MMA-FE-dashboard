@@ -28,18 +28,21 @@ export default function useUser() {
     value: InstructorCertsParams,
     navigate: NavigateFunction
   ) => {
-    // dispatch()
     const data = await dispatch(postInstructorCertsAsync(value));
     console.log(data);
-    if (data) {
-      navigate("/wait");
+    if (!data) {
+      return false;
     }
+    navigate("/instructor/wait");
+    return true;
   };
+
   useEffect(() => {
     if (!userLoading) {
       dispatch(fetchAllUserAsync(input));
     }
   }, [userLoading, dispatch]);
+
   return {
     userLoading,
     pageCount,

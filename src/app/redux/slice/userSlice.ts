@@ -1,5 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { InstructorCertsParams, UserData } from "../../models/user.models";
+import {
+  InstructorCertsParams,
+  TeachersData,
+  UserData,
+} from "../../models/user.models";
 import { MetaData, PaginationParams } from "../../models/global.models";
 import { RootState } from "../store";
 import agent from "../../utils/agent";
@@ -53,7 +57,7 @@ export const postInstructorCertsAsync = createAsyncThunk<
   try {
     const user = localStorage.getItem("user");
     const userObj = user ? JSON.parse(user) : {};
-    console.log("userObj:", userObj)
+    console.log("userObj:", userObj);
     const response = await agent.User.postInstructorCerts(
       userObj.user.id,
       input

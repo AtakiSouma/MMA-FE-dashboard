@@ -3,7 +3,17 @@ import Table, { ColumnsType } from "antd/es/table";
 import React, { useState } from "react";
 import { TeachersData } from "../../models/user.models";
 import { useAppDispatch } from "../../redux/hook";
-import { Alert, Dropdown, Input, Menu, MenuProps, Pagination, Tag } from "antd";
+import {
+  Alert,
+  Dropdown,
+  Input,
+  Menu,
+  MenuProps,
+  Modal,
+  Pagination,
+  Tag,
+  notification,
+} from "antd";
 import useTeacher from "../../hooks/useTeacher";
 import {
   setCurrentPage,
@@ -22,6 +32,9 @@ import {
   SyncOutlined,
 } from "@ant-design/icons";
 import ModalComponentInTeacher from "../../components/ModalCompoenetInTeacher";
+import agent from "../../utils/agent";
+import { useNavigate } from "react-router-dom";
+import TextArea from "antd/es/input/TextArea";
 
 type columnProps = {
   currentPage: number;
@@ -29,12 +42,13 @@ type columnProps = {
 };
 
 const TeacherListScreen = () => {
+  const navigate = useNavigate();
   const items = (record: TeachersData) => [
     {
       label: (
         <div
           className="flex flex-row items-center gap-2 hover:text-blue-400"
-          onClick={() => showModal(record)}
+          onClick={() => showModal(record.id)}
         >
           <GoEye />
           <p>View</p>
@@ -45,8 +59,8 @@ const TeacherListScreen = () => {
     {
       label: (
         <div
-          className="flex flex-row items-center gap-2  hover:text-green-400"
-          onClick={() => alert("Hello Approve")}
+          className={`flex flex-row items-center gap-2 hover:text-green-400 ${record.isCertified !== "Yes" ? "hidden" : ""}`}
+          onClick={() => acceptInstructor(record.id)}
         >
           <GoShieldCheck />
           <p>Approve</p>
@@ -57,8 +71,8 @@ const TeacherListScreen = () => {
     {
       label: (
         <div
-          className="flex flex-row items-center gap-2 hover:text-red-400"
-          onClick={() => alert("Hello Reject")}
+          className={`flex flex-row items-center gap-2 hover:text-red-400 ${record.isCertified !== "Yes" ? "hidden" : ""}`}
+          onClick={() => handleRejectModal(record.id)}
         >
           <AiOutlineDelete />
           <p>Reject</p>
@@ -70,10 +84,76 @@ const TeacherListScreen = () => {
   // handle modal
   const [modalRecord, setModalRecord] = useState<TeachersData | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const showModal = (record:TeachersData) => {
-    setModalRecord(record);
+  const [rejectModal, setRejectModal] = useState(false);
+  const [rejectId, setRejectId] = useState("");
+  const [message, setMessage] = useState("");
 
-    setIsModalOpen(true);
+  const fetchDetail = async (id: string) => {
+    try {
+      const response = await agent.User.getInstructorDetail(id);
+      console.log(response);
+      setModalRecord(response);
+      if (response) {
+        setIsModalOpen(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const showModal = (id: string) => {
+    fetchDetail(id);
+  };
+
+  const acceptInstructor = async (id: string) => {
+    try {
+      const response = await agent.User.acceptInstructor(id);
+      if (response) {
+        notification.success({
+          message: "Success",
+          description: "Instructor has been accepted",
+          placement: "topRight",
+        });
+        dispatch(setTeacherLoading(false));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleRejectModal = async (id: string) => {
+    setRejectId(id);
+    setRejectModal(true);
+  };
+
+  const rejectInstructor = async (reasons: string) => {
+    try {
+      const response = await agent.User.rejectInstructor(rejectId, reasons);
+      if (response) {
+        notification.success({
+          message: "Success",
+          description: "Instructor has been rejected",
+          placement: "topRight",
+        });
+        dispatch(setTeacherLoading(false));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleFormSubmit = () => {
+    if (!message) {
+      notification.error({
+        message: "Error",
+        description: "Please provide rejection reasons.",
+        placement: "topRight",
+      });
+      return;
+    }
+    rejectInstructor(message);
+    setIsModalOpen(false);
+    setRejectModal(false);
+    setMessage("");
   };
 
   const handleOk = () => {
@@ -82,11 +162,12 @@ const TeacherListScreen = () => {
 
   const handleCancel = () => {
     setIsModalOpen(false);
+    setRejectModal(false);
   };
   const getMenu = (record: TeachersData) => (
     <Menu>
-      {items(record).map(item => (
-        <Menu.Item key={item.key}>{item.label}</Menu.Item>
+      {items(record).map((item) => (
+        <Menu.Item key={item.key}>{item.label} </Menu.Item>
       ))}
     </Menu>
   );
@@ -203,9 +284,9 @@ const TeacherListScreen = () => {
       title: "Action",
       dataIndex: "id",
       width: "5%",
-      render: (id,record) => (
+      render: (id, record) => (
         <>
-          <Dropdown overlay={() => getMenu(record)} trigger={['click']}>
+          <Dropdown overlay={() => getMenu(record)} trigger={["click"]}>
             <div className="flex flex-col items-center">
               <BsThreeDots
                 className="hover:cursor-pointer"
@@ -279,6 +360,21 @@ const TeacherListScreen = () => {
         showModal={showModal}
         item={modalRecord}
       />
+      <Modal
+        title="Rejection Reasons"
+        open={rejectModal}
+        onOk={handleFormSubmit}
+        onCancel={handleCancel}
+      >
+        <form onSubmit={handleFormSubmit}>
+          <TextArea
+            rows={4}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Enter rejection reasons..."
+          />
+        </form>
+      </Modal>
     </>
   );
 };

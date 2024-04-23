@@ -4,11 +4,10 @@ import { Route, Routes, createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layout/MainLayout";
 import PrivateRoute from "./privateRoute";
 import { ROLE } from "../constants/role";
-import StartPage from "../pages/start/StartPage";
-import WaitPage from "../pages/wait/WaitPage";
+
 // ********************************
 // import Page from index.ts
-const DashBoard = lazy(() => import("../pages/dashboard/components/DashBoard"));
+const DashBoard = lazy(() => import("../pages/dashboard/DashBoard"));
 const LoginPage = lazy(() => import("../pages/auth/LoginPage"));
 const SignUpPage = lazy(() => import("../pages/auth/SingUpPage"));
 const UserManagementPage = lazy(
@@ -21,6 +20,10 @@ const CreateCoursePage = lazy(
 );
 const OrderListPage = lazy(() => import("../pages/order/OrderList"));
 const TeacherListPage = lazy(() => import("../pages/user/TeacherListScreen"));
+const StartPage = lazy(() => import("../pages/start/StartPage"));
+const WaitPage = lazy(() => import("../pages/wait/WaitPage"));
+const PaymentPage = lazy(() => import("../pages/payment/PaymentPage"));
+const TransactionPage = lazy(() => import("../pages/payment/TransactionPage"));
 // end import pages
 // ********************************
 
@@ -117,29 +120,39 @@ export const router = createBrowserRouter([
   },
   {
     path: "instructor",
-    element: (
-      <Routes>
-        <Route
-          path="start"
-          element={
-            <Suspense fallback={<></>}>
-              {/* <PrivateRoute inverted={false} requiredRoles={[ROLE.INSTRUCTOR]}> */}
-              <StartPage />
-              {/* </PrivateRoute> */}
-            </Suspense>
-          }
-        />
-        <Route
-          path="wait"
-          element={
-            <Suspense fallback={<></>}>
-              {/* <PrivateRoute inverted={false} requiredRoles={[ROLE.INSTRUCTOR]}> */}
-              <WaitPage />
-              {/* </PrivateRoute> */}
-            </Suspense>
-          }
-        />
-      </Routes>
-    ),
+    children: [
+      {
+        path: "start",
+        element: (
+          <PrivateRoute inverted={false} requiredRoles={[ROLE.INSTRUCTOR]}>
+            <StartPage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "wait",
+        element: (
+          <PrivateRoute inverted={false} requiredRoles={[ROLE.INSTRUCTOR]}>
+            <WaitPage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "payment",
+        element: (
+          <PrivateRoute inverted={false} requiredRoles={[ROLE.INSTRUCTOR]}>
+            <PaymentPage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "transaction",
+        element: (
+          <PrivateRoute inverted={false} requiredRoles={[ROLE.INSTRUCTOR]}>
+            <TransactionPage />
+          </PrivateRoute>
+        ),
+      },
+    ],
   },
 ]);

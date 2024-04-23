@@ -34,12 +34,25 @@ export const fetchAllTeacherAsync = createAsyncThunk<
   TeachersData[],
   PaginationParams,
   { state: RootState }
->("course/fetchAllCourseAsync", async (input, thunkAPI) => {
+>("teacher/fetchAllTeacherAsync", async (input, thunkAPI) => {
   try {
     const response = await agent.User.getAllTeachers(input);
     console.log("user response: ", response);
     thunkAPI.dispatch(setPageCount(response.pageCount));
     thunkAPI.dispatch(setTotalCount(response.totalCount));
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue({ error });
+  }
+});
+
+export const getInstructorDetailAsync = createAsyncThunk<
+  TeachersData,
+  string,
+  { state: RootState }
+>("user/getUserDetailAsync", async (input, thunkAPI) => {
+  try {
+    const response = await agent.User.getInstructorDetail(input);
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue({ error });
