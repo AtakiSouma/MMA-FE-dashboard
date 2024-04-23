@@ -64,9 +64,9 @@ export function GoogleLoginButton() {
         user.user.isVerified === false &&
         user.user.role === "6615424b73f8eddb58cfe6ac"
       ) {
-        navigate("/wait");
+        navigate("/instructor/wait");
       } else {
-        navigate("/start");
+        navigate("/instructor/start");
       }
     } catch (error) {
       console.log("Could not login with Google ", error);

@@ -83,7 +83,10 @@ export const router = createBrowserRouter([
             path="result-list"
             element={
               <Suspense fallback={<></>}>
-                <PrivateRoute inverted={false} requiredRoles={[ROLE.INSTRUCTOR]}>
+                <PrivateRoute
+                  inverted={false}
+                  requiredRoles={[ROLE.INSTRUCTOR]}
+                >
                   <ResultListPage />
                 </PrivateRoute>
               </Suspense>
@@ -98,15 +101,34 @@ export const router = createBrowserRouter([
     element: <LoginPage />,
   },
   {
-    path: "start",
-    element: <StartPage />,
-  },
-  {
-    path: "wait",
-    element: <WaitPage />,
-  },
-  {
     path: "register",
     element: <SignUpPage />,
+  },
+  {
+    path: "instructor",
+    element: (
+      <Routes>
+        <Route
+          path="start"
+          element={
+            <Suspense fallback={<></>}>
+              {/* <PrivateRoute inverted={false} requiredRoles={[ROLE.INSTRUCTOR]}> */}
+              <StartPage />
+              {/* </PrivateRoute> */}
+            </Suspense>
+          }
+        />
+        <Route
+          path="wait"
+          element={
+            <Suspense fallback={<></>}>
+              {/* <PrivateRoute inverted={false} requiredRoles={[ROLE.INSTRUCTOR]}> */}
+              <WaitPage />
+              {/* </PrivateRoute> */}
+            </Suspense>
+          }
+        />
+      </Routes>
+    ),
   },
 ]);
