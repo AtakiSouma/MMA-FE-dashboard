@@ -5,8 +5,7 @@ import { CiDiscount1 } from "react-icons/ci";
 import { FaCheckDouble } from "react-icons/fa";
 import { IoCheckmarkCircle } from "react-icons/io5";
 import type { CheckboxProps } from "antd";
-
-import CoursePlayer from "../../../utils/CoursePlayer";
+import ReactPlayer from "react-player";
 import { Button, Checkbox, Divider, Modal, Typography } from "antd";
 import Input from "antd/es/input/Input";
 import Ratings from "../../../utils/Rating";
@@ -37,7 +36,7 @@ const CoursePreview: React.FC<Props> = ({
     setIsModalOpen(false);
   };
 
-  const [checked, setChecked] = useState<boolean>(true);
+  const [checked, setChecked] = useState<boolean>(false);
   const onChange: CheckboxProps["onChange"] = (e) => {
     console.log(`checked = ${e.target.checked}`);
     setChecked(e.target.checked);
@@ -50,8 +49,8 @@ const CoursePreview: React.FC<Props> = ({
     handleCourseCreate();
   };
   const discountPercentage =
-    ((courseData?.estimatePRice - courseData?.price) /
-      courseData?.estimatePRice) *
+    ((courseData?.estimatePrice - courseData?.price) /
+      courseData?.estimatePrice) *
     100;
 
   const discountPercentagePrice = discountPercentage.toFixed(0);
@@ -61,19 +60,22 @@ const CoursePreview: React.FC<Props> = ({
       <div className="w-[80%] m-auto py-5 mb-5">
         <div className="w-full relative">
           <div className="w-full mt-10">
-            <CoursePlayer
+            <ReactPlayer url={courseData?.demoUrl} width="100%" height="100%" playing controls={true} />
+
+            {/* <CoursePlayer
               videoUrl={courseData?.demoUrl}
               title={courseData?.title}
-            />
+            /> */}
           </div>
           <div className="flex items-center">
+           
             <h1 className="pt-5 text-[20px]">
               {courseData?.price === 0 ? "Free" : courseData?.price + "$"}
             </h1>
             <h5 className="pl-3 text-[20px] mt-2 line-through opacity-80">
-              {courseData?.estimatePRice}$
+              {courseData?.estimatePrice}$
             </h5>
-            <h4 className="pl-5 pt-4 text-[22px]">
+            <h4 className="pl-5 pt-4 text-[22px]  text-yellow-600">
               {discountPercentagePrice}%Off
             </h4>
           </div>

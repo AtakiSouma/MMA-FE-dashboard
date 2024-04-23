@@ -57,25 +57,25 @@ const SideBar = () => {
       case "66153c6d09d7c5006797e0a3":
         return [
           getItem("Dashboard", "dashboard", <LuLayoutDashboard />),
-          getItem("User", "user", <LuUsers2 />),
+          getItem("User", "", <LuUsers2 />, [
+            getItem("User", "user", <LuUsers2 />),
+            getItem("Teacher", "teacher-list", <CiBoxList />),
+          ]),
           getItem("Course", "", <GiBookCover />, [
             getItem("List", "course", <CiBoxList />),
           ]),
-          getItem("Order" , "order-list" ,<GoChecklist/> )
+          getItem("Order", "order-list", <GoChecklist />),
         ];
       // teacher
-
       case "6615424b73f8eddb58cfe6ac":
         return [
           getItem("Course", "", <GiBookCover />, [
             getItem("List", "course", <CiBoxList />),
             getItem("Create", "create-course", <IoMdCreate />),
-
           ]),
-          getItem("Order" , "order-list" ,<RiShoppingCart2Fill/>),
-          getItem("Comment", "comment-list" ,<MdQuickreply/> ),
-          getItem("Response", "result-list" ,<MdCreditScore/> ),
-
+          getItem("Order", "order-list", <RiShoppingCart2Fill />),
+          getItem("Comment", "comment-list", <MdQuickreply />),
+          getItem("Response", "result-list", <MdCreditScore />),
         ];
       default:
         return [];

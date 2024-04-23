@@ -20,6 +20,7 @@ const CreateCoursePage = lazy(
   () => import("../pages/courses/CreateCoursePage")
 );
 const OrderListPage = lazy(() => import("../pages/order/OrderList"));
+const TeacherListPage = lazy(() => import("../pages/user/TeacherListScreen"));
 // end import pages
 // ********************************
 
@@ -88,6 +89,16 @@ export const router = createBrowserRouter([
                   requiredRoles={[ROLE.INSTRUCTOR]}
                 >
                   <ResultListPage />
+                </PrivateRoute>
+              </Suspense>
+            }
+          />
+          <Route
+            path="teacher-list"
+            element={
+              <Suspense fallback={<></>}>
+                <PrivateRoute inverted={false} requiredRoles={[ROLE.ADMIN]}>
+                  <TeacherListPage />
                 </PrivateRoute>
               </Suspense>
             }
