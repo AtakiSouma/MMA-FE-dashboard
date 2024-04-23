@@ -27,7 +27,23 @@ export function useAuth() {
       localStorage.setItem("access_token", access_token);
       localStorage.setItem("user", JSON.stringify(user));
       localStorage.setItem("link", JSON.stringify(link));
-      navigate(link);
+      if (
+        (user.isCertified === "Yes" &&
+          user.isVerified === true &&
+          user.role === "6615424b73f8eddb58cfe6ac") ||
+        user.role === "66153c6d09d7c5006797e0a3"
+      ) {
+        console.log("Here")
+        navigate(link);
+      } else if (
+        user.isCertified === "Proccessing" &&
+        user.isVerified === false &&
+        user.role === "6615424b73f8eddb58cfe6ac"
+      ) {
+        navigate("/wait");
+      } else {
+        navigate("/start");
+      }
     } catch (error) {
       if (error) {
         console.log("error", error);

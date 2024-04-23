@@ -30,3 +30,10 @@ export const ErrorMessageLogin = {
     required: "Password is required",
   },
 };
+
+export const ErrorMessageCerts = {
+  url: {
+    invalid: "Invalid certification",
+    required: "Certification is required",
+  }
+}

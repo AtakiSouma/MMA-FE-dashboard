@@ -9,3 +9,10 @@ export interface UserData {
   avatar: string;
   photoUrl: string;
 }
+
+export interface InstructorCertsParams {
+  listCerts: {
+    type: string;
+    url: string;
+  }[];
+}

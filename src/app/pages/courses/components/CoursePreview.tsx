@@ -152,7 +152,6 @@ const CoursePreview: React.FC<Props> = ({
               Please make sure you read carefully our web's policy{" "}
             </Button>
           </Checkbox>
-          ;
           <Divider />
           <div className="w-full flex items-center justify-between">
             <div
