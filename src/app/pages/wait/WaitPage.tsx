@@ -1,5 +1,6 @@
 import { CheckCircleOutlined } from "@ant-design/icons";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const WaitPage = () => {
   // https://i.etsystatic.com/40957748/r/il/e4efaa/4810125152/il_fullxfull.4810125152_23ir.jpg
@@ -16,14 +17,15 @@ const WaitPage = () => {
     >
       <div
         className="flex flex-col gap-10 items-center justify-center relative shadow-md  drop-shadow-2xl rounded-sm bg-[#ffffff]
-      overflow-hidden w-[1200px] max-w-[100%] min-h-[480px] h-[65%] mx-96 p-28 text-center"
+      overflow-hidden w-[1200px] max-w-[100%] min-h-[480px] h-[65%] mx-96 py-28  text-center"
       >
+        <CheckCircleOutlined className="text-9xl text-[#77B0AA]" />
         <div className="text-4xl">Your Application has been sent!</div>
         <div>
           It will take some time for us to review your application, please wait
           for our response via email
         </div>
-        <CheckCircleOutlined className="text-6xl text-[#77B0AA]" />
+        <Link to={`/login`}>Go Back</Link>
       </div>
     </div>
   );
