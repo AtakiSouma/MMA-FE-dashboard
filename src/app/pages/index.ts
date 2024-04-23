@@ -1,4 +1,4 @@
-import DashBoard from "./DashBoard";
+import DashBoard from "./dashboard/components/DashBoard";
 import LoginPage from "./auth/LoginPage";
 import SingUpPage from "./auth/SingUpPage";
 import UserManagementPage from "./user/UserManagementPage";

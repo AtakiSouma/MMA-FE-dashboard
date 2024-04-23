@@ -64,6 +64,7 @@ export const fetchAllCourseAsync = createAsyncThunk<
   }
 });
 
+
 const courseSlice = createSlice({
   name: "course",
   initialState,

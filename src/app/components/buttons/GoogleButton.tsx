@@ -25,6 +25,7 @@ import {
   loginSuccessWithGoogle,
 } from "../../redux/slice/authSlice";
 import { UserData } from "../../models/auth.models";
+import { unwrapResult } from "@reduxjs/toolkit";
 export function GoogleLoginButton() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ export function GoogleLoginButton() {
       const provider = new GoogleAuthProvider();
       const auth = getAuth(app);
       const result = await signInWithPopup(auth, provider);
-      console.log("result", result);
+      console.log("result:", result)
       const { data }: { data: UserData } = await baseApi.post(
         "/api/v1/auth/login-with-Google",
         {
@@ -43,6 +44,7 @@ export function GoogleLoginButton() {
           photo: result.user.photoURL,
         }
       );
+      console.log(data)
       const { link, access_token, ...user } = data.data;
       localStorage.setItem("access_token", access_token);
       localStorage.setItem("user", JSON.stringify(user));

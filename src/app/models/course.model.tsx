@@ -20,3 +20,7 @@ export interface CourseData {
   status: string;
   createdAt: Date;
 }
+
+export interface CourseCount {
+  count: number;
+}

@@ -4,6 +4,7 @@ import apiJWT from "./apiJwt";
 import baseApi from "./BaseApi";
 import { UserRegisterParams } from "../models/auth.models";
 import { PaginationParams } from "../models/global.models";
+import { InstructorCertsParams } from "../models/user.models";
 
 const responseBody = (response: AxiosResponse) => response.data;
 
@@ -41,6 +42,15 @@ const User = {
       limit: input.limit,
       search: input.search,
     }),
+  getCustomersCount: () =>
+    requests.get("/api/v1/user/dashboard/instructorsCount"),
+
+  getInstructorsCount: () =>
+    requests.get("/api/v1/user/dashboard/customersCount"),
+  postInstructorCerts: (id: string, input: InstructorCertsParams) =>
+    requests.put(`/api/v1/user/instructor/postCerts/${id}`, {
+      listCerts: input.listCerts,
+    }),
 };
 const Categories = {
   getAllCategories: () => requests.get("/api/v1/category/"),
@@ -56,6 +66,7 @@ const Course = {
       limit: input.limit,
       search: input.search,
     }),
+  getCoursesCount: () => requests.get("/api/v1/course/getCoursesCount"),
 };
 const agent = {
   User,

@@ -36,6 +36,9 @@ export interface UserData {
       name: string;
       photoUrl: string;
       role: string;
+      isVerified: boolean;
+      isCertified: string;
+      hasPaid: boolean;
     };
     status: number;
     success: boolean;
@@ -51,5 +54,8 @@ export interface UserData {
     name: string;
     photoUrl: string;
     role: string;
+    isVerified: boolean;
+    isCertified: string;
+    hasPaid: boolean;
   };
 }
