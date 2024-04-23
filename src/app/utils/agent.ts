@@ -55,6 +55,12 @@ const User = {
     requests.put(`/api/v1/user/instructor/postCerts/${id}`, {
       listCerts: input.listCerts,
     }),
+  getAllTeachers: (input: PaginationParams) =>
+    requests.post("/api/v1/user/instructors/get-all", {
+      page: input.page,
+      limit: input.limit,
+      search: input.search,
+    }),
 };
 const Categories = {
   getAllCategories: () => requests.get("/api/v1/category/"),
