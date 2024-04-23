@@ -61,7 +61,13 @@ const User = {
       limit: input.limit,
       search: input.search,
     }),
-  getInstructorDetail: (id: string) => requests.get(`/api/v1/user/${id}`)
+  getInstructorDetail: (id: string) => requests.get(`/api/v1/user/${id}`),
+  acceptInstructor: (id: string) =>
+    requests.put(`/api/v1/user/instructor/accept/${id}`, {}),
+  rejectInstructor: (id: string, reasons: string) =>
+    requests.put(`/api/v1/user/instructor/reject/${id}`, {
+      reasons: reasons,
+    }),
 };
 const Categories = {
   getAllCategories: () => requests.get("/api/v1/category/"),

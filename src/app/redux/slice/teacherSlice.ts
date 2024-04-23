@@ -34,7 +34,7 @@ export const fetchAllTeacherAsync = createAsyncThunk<
   TeachersData[],
   PaginationParams,
   { state: RootState }
->("course/fetchAllCourseAsync", async (input, thunkAPI) => {
+>("teacher/fetchAllTeacherAsync", async (input, thunkAPI) => {
   try {
     const response = await agent.User.getAllTeachers(input);
     console.log("user response: ", response);

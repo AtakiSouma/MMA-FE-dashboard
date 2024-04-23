@@ -147,11 +147,19 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "start",
-        element: <StartPage />,
+        element: (
+          <PrivateRoute inverted={false} requiredRoles={[ROLE.INSTRUCTOR]}>
+            <StartPage />
+          </PrivateRoute>
+        ),
       },
       {
         path: "wait",
-        element: <WaitPage />,
+        element: (
+          <PrivateRoute inverted={false} requiredRoles={[ROLE.INSTRUCTOR]}>
+            <WaitPage />
+          </PrivateRoute>
+        ),
       },
     ],
   },

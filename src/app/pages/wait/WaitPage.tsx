@@ -11,12 +11,12 @@ const WaitPage = () => {
   const navigate = useNavigate();
   const handleGoBack = async () => {
     try {
-      const response = await apiJWT.post(`/api/v1/auth/logout`);
-      if (response) {
-        localStorage.clear();
+      // const response = await apiJWT.post(`/api/v1/auth/logout`);
+      // if (response) {
+      //   localStorage.clear();
         
         navigate("/login");
-      }
+      // }
     } catch (error) {
       notification.error({
         message: "Lỗi",
