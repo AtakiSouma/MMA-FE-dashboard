@@ -16,6 +16,8 @@ import { CiBoxList } from "react-icons/ci";
 import logo from "../../../assets/logoipsum-254.svg";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { useAppSelector } from "../../redux/hook";
+import { CgUserList } from "react-icons/cg";
+
 type MenuItem = Required<MenuProps>["items"][number];
 function getItem(
   label: React.ReactNode,
@@ -57,11 +59,11 @@ const SideBar = () => {
       case "66153c6d09d7c5006797e0a3":
         return [
           getItem("Dashboard", "dashboard", <LuLayoutDashboard />),
-          getItem("User", "", <LuUsers2 />, [
-            getItem("User", "user", <LuUsers2 />),
-            getItem("Teacher", "teacher-list", <CiBoxList />),
+          getItem("User", "user", <LuUsers2 />, [
+            getItem("User-List", "user", <LuUsers2 />),
+            getItem("Teacher", "teacher-list", <CgUserList />),
           ]),
-          getItem("Course", "", <GiBookCover />, [
+          getItem("Course", "course", <GiBookCover />, [
             getItem("List", "course", <CiBoxList />),
           ]),
           getItem("Order", "order-list", <GoChecklist />),
