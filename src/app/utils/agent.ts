@@ -3,8 +3,12 @@ import { AxiosResponse } from "axios";
 import apiJWT from "./apiJwt";
 import baseApi from "./BaseApi";
 import { UserRegisterParams } from "../models/auth.models";
-import { PaginationParams } from "../models/global.models";
 import { InstructorCertsParams } from "../models/user.models";
+import {
+  PaginationParams,
+  PaginationParamsWithId,
+  replyParams,
+} from "../models/global.models";
 
 const responseBody = (response: AxiosResponse) => response.data;
 
@@ -56,7 +60,7 @@ const Categories = {
   getAllCategories: () => requests.get("/api/v1/category/"),
 };
 const Role = {
-  checkRole: () => requests.get("/api/v1/role/get-role"),
+  checkRole: (id: string) => requests.get(`api/v1/role/get-role/${id}`),
 };
 const Course = {
   createCourse: (data: any) => requests.post("/api/v1/course", { data }),
@@ -68,10 +72,35 @@ const Course = {
     }),
   getCoursesCount: () => requests.get("/api/v1/course/getCoursesCount"),
 };
+const Order = {
+  getAllOrder: (input: PaginationParams) =>
+    requests.post("/api/v1/order/get-all", {
+      page: input.page,
+      limit: input.limit,
+      search: input.search,
+    }),
+};
+const Result = {
+  getAllResult: (input: PaginationParamsWithId) =>
+    requests.post("/api/v1/result/get-all", {
+      page: input.page,
+      limit: input.limit,
+      search: input.search,
+      instructorId: input.instructorId,
+    }),
+  replyResult: (input: replyParams) =>
+    requests.put("/api/v1/result/reply", {
+      instructorId: input.instructorId,
+      resultId: input.resultId,
+      replyMessage: input.replyMessage,
+    }),
+};
 const agent = {
   User,
   Role,
   Categories,
   Course,
+  Order,
+  Result,
 };
 export default agent;

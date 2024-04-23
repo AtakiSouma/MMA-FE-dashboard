@@ -7,10 +7,15 @@ import Sider from "antd/es/layout/Sider";
 import { cn } from "../../utils/cn";
 import { GiBookCover } from "react-icons/gi";
 import { IoMdCreate } from "react-icons/io";
+import { GoChecklist } from "react-icons/go";
+import { MdQuickreply } from "react-icons/md";
+import { MdCreditScore } from "react-icons/md";
+import { RiShoppingCart2Fill } from "react-icons/ri";
 
 import { CiBoxList } from "react-icons/ci";
 import logo from "../../../assets/logoipsum-254.svg";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import { useAppSelector } from "../../redux/hook";
 type MenuItem = Required<MenuProps>["items"][number];
 function getItem(
   label: React.ReactNode,
@@ -43,15 +48,38 @@ const SideBar = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+  // TODO: check role
+  const data = useAppSelector((state) => state.role.role);
+  console.log("role", data);
   const getConditionalItems = (): MenuItem[] => {
-    return [
-      getItem("Dashboard", "dashboard", <LuLayoutDashboard />),
-      getItem("User", "user", <LuUsers2 />),
-      getItem("Course", "", <GiBookCover />, [
-        getItem("List", "course", <CiBoxList />),
-        getItem("Create", "create-course",<IoMdCreate/>),
-      ]),
-    ];
+    switch (data) {
+      // admin
+      case "66153c6d09d7c5006797e0a3":
+        return [
+          getItem("Dashboard", "dashboard", <LuLayoutDashboard />),
+          getItem("User", "user", <LuUsers2 />),
+          getItem("Course", "", <GiBookCover />, [
+            getItem("List", "course", <CiBoxList />),
+          ]),
+          getItem("Order" , "order-list" ,<GoChecklist/> )
+        ];
+      // teacher
+
+      case "6615424b73f8eddb58cfe6ac":
+        return [
+          getItem("Course", "", <GiBookCover />, [
+            getItem("List", "course", <CiBoxList />),
+            getItem("Create", "create-course", <IoMdCreate />),
+
+          ]),
+          getItem("Order" , "order-list" ,<RiShoppingCart2Fill/>),
+          getItem("Comment", "comment-list" ,<MdQuickreply/> ),
+          getItem("Response", "result-list" ,<MdCreditScore/> ),
+
+        ];
+      default:
+        return [];
+    }
   };
   return (
     <>

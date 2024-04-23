@@ -5,14 +5,17 @@ import { useAppDispatch } from "../redux/hook";
 import { roleCheckSuccess } from "../redux/slice/roleSlice";
 import agent from "../utils/agent";
 import { LoadingOutlined } from "@ant-design/icons";
+import { UserData } from "../models/auth.models";
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(true);
 
   const dispatch = useAppDispatch();
+  const userDataObject: UserData = JSON.parse(localStorage.getItem("user")!);
+
   const initApp = useCallback(async () => {
     try {
       const fetchData = async () => {
-        const response = await agent.Role.checkRole();
+        const response = await agent.Role.checkRole(userDataObject.user.id);
         dispatch(roleCheckSuccess(response));
       };
       fetchData();

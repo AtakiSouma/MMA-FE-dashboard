@@ -10,7 +10,6 @@ import CoursePlayer from "../../../utils/CoursePlayer";
 import { Button, Checkbox, Divider, Modal, Typography } from "antd";
 import Input from "antd/es/input/Input";
 import Ratings from "../../../utils/Rating";
-import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 type Props = {
   active: number;
   setActive: (active: number) => void;
