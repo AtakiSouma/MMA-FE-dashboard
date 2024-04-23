@@ -23,9 +23,8 @@ const CoursePreview: React.FC<Props> = ({
   handleCourseCreate,
   setActive,
 }) => {
-
   const [isModalOpen, setIsModalOpen] = useState(false);
- 
+
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -151,7 +150,6 @@ const CoursePreview: React.FC<Props> = ({
               Please make sure you read carefully our web's policy{" "}
             </Button>
           </Checkbox>
-          ;
           <Divider />
           <div className="w-full flex items-center justify-between">
             <div

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { UserData } from "../../models/user.models";
+import { InstructorCertsParams, UserData } from "../../models/user.models";
 import { MetaData, PaginationParams } from "../../models/global.models";
 import { RootState } from "../store";
 import agent from "../../utils/agent";
@@ -39,6 +39,26 @@ export const fetchAllUserAsync = createAsyncThunk<
     console.log("user response: ", response);
     thunkAPI.dispatch(setPageCount(response.pageCount));
     thunkAPI.dispatch(setTotalCount(response.totalCount));
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue({ error });
+  }
+});
+
+export const postInstructorCertsAsync = createAsyncThunk<
+  UserData[],
+  InstructorCertsParams,
+  { state: RootState }
+>("user/postInstructorCertsAsync", async (input, thunkAPI) => {
+  try {
+    const user = localStorage.getItem("user");
+    const userObj = user ? JSON.parse(user) : {};
+    console.log("userObj:", userObj)
+    const response = await agent.User.postInstructorCerts(
+      userObj.user.id,
+      input
+    );
+    console.log("Response:", response);
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue({ error });

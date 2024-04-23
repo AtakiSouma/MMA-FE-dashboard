@@ -1,7 +1,12 @@
 import { useEffect } from "react";
 import { PaginationParams } from "../models/global.models";
 import { useAppDispatch, useAppSelector } from "../redux/hook";
-import { fetchAllUserAsync } from "../redux/slice/userSlice";
+import {
+  fetchAllUserAsync,
+  postInstructorCertsAsync,
+} from "../redux/slice/userSlice";
+import { InstructorCertsParams } from "../models/user.models";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 export default function useUser() {
   const {
@@ -13,12 +18,23 @@ export default function useUser() {
   } = useAppSelector((state) => state.user);
 
   const dispatch = useAppDispatch();
+
   const input: PaginationParams = {
     limit: 6,
     page: currentPage,
     search: searchValue,
   };
-
+  const handleSubmitCerts = async (
+    value: InstructorCertsParams,
+    navigate: NavigateFunction
+  ) => {
+    // dispatch()
+    const data = await dispatch(postInstructorCertsAsync(value));
+    console.log(data);
+    if (data) {
+      navigate("/wait");
+    }
+  };
   useEffect(() => {
     if (!userLoading) {
       dispatch(fetchAllUserAsync(input));
@@ -30,5 +46,6 @@ export default function useUser() {
     currentPage,
     searchValue,
     userAdaptersByPage,
+    handleSubmitCerts,
   };
 }

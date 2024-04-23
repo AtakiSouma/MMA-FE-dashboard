@@ -25,6 +25,7 @@ import {
   loginSuccessWithGoogle,
 } from "../../redux/slice/authSlice";
 import { UserData } from "../../models/auth.models";
+import { unwrapResult } from "@reduxjs/toolkit";
 export function GoogleLoginButton() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ export function GoogleLoginButton() {
       const provider = new GoogleAuthProvider();
       const auth = getAuth(app);
       const result = await signInWithPopup(auth, provider);
-      console.log("result", result);
+      console.log("result:", result);
       const { data }: { data: UserData } = await baseApi.post(
         "/api/v1/auth/login-with-Google",
         {
@@ -43,6 +44,7 @@ export function GoogleLoginButton() {
           photo: result.user.photoURL,
         }
       );
+      console.log(data);
       const { link, access_token, ...user } = data.data;
       localStorage.setItem("access_token", access_token);
       localStorage.setItem("user", JSON.stringify(user));
@@ -50,7 +52,22 @@ export function GoogleLoginButton() {
       console.log("data from login Google:", data);
       dispatch(loginSuccessWithGoogle(data));
       console.log(data.data.link);
-      navigate(data.data.link);
+      if (
+        (user.user.isCertified === "Yes" &&
+          user.user.isVerified === true &&
+          user.user.role === "6615424b73f8eddb58cfe6ac") ||
+        user.user.role === "66153c6d09d7c5006797e0a3"
+      ) {
+        navigate(data.data.link);
+      } else if (
+        user.user.isCertified === "Proccessing" &&
+        user.user.isVerified === false &&
+        user.user.role === "6615424b73f8eddb58cfe6ac"
+      ) {
+        navigate("/wait");
+      } else {
+        navigate("/start");
+      }
     } catch (error) {
       console.log("Could not login with Google ", error);
       dispatch(loginFailure("Unknown error"));

@@ -4,9 +4,11 @@ import { Route, Routes, createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layout/MainLayout";
 import PrivateRoute from "./privateRoute";
 import { ROLE } from "../constants/role";
+import StartPage from "../pages/start/StartPage";
+import WaitPage from "../pages/wait/WaitPage";
 // ********************************
 // import Page from index.ts
-const DashBoard = lazy(() => import("../pages/DashBoard"));
+const DashBoard = lazy(() => import("../pages/dashboard/components/DashBoard"));
 const LoginPage = lazy(() => import("../pages/auth/LoginPage"));
 const SignUpPage = lazy(() => import("../pages/auth/SingUpPage"));
 const UserManagementPage = lazy(
@@ -94,6 +96,14 @@ export const router = createBrowserRouter([
   {
     path: "login",
     element: <LoginPage />,
+  },
+  {
+    path: "start",
+    element: <StartPage />,
+  },
+  {
+    path: "wait",
+    element: <WaitPage />,
   },
   {
     path: "register",

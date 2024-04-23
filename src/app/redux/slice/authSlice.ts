@@ -1,4 +1,8 @@
-import { CurrentUser, UserData, UserRegisterParams } from "../../models/auth.models";
+import {
+  CurrentUser,
+  UserData,
+  UserRegisterParams,
+} from "../../models/auth.models";
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import agent from "../../utils/agent";
 import { AxiosError } from "axios";
@@ -18,7 +22,7 @@ const initialState: UserProps = {
   error: false,
   displayError: "",
   status: "",
-  googleUser: {} as UserData
+  googleUser: {} as UserData,
 };
 export const createAccounts = createAsyncThunk(
   "account/createAccountAsync",
@@ -39,6 +43,7 @@ export const createAccounts = createAsyncThunk(
     return { message: "Something went wrong..." };
   }
 );
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -56,11 +61,11 @@ const authSlice = createSlice({
       state.error = true;
       state.displayError = action.payload;
     },
-    loginSuccessWithGoogle:(state, action: PayloadAction<UserData>)=> {
+    loginSuccessWithGoogle: (state, action: PayloadAction<UserData>) => {
       state.isFetching = false;
       state.googleUser = action.payload;
       state.error = false;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(createAccounts.pending, (state) => {
@@ -78,6 +83,11 @@ const authSlice = createSlice({
     });
   },
 });
-export const { loginStart, loginSuccess, loginFailure ,loginSuccessWithGoogle} = authSlice.actions;
+export const {
+  loginStart,
+  loginSuccess,
+  loginFailure,
+  loginSuccessWithGoogle,
+} = authSlice.actions;
 
 export default authSlice.reducer;
